@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  bookclub_id: 1
+  patron_id: 1
+  start_date: 2011-10-30
+  end_date: 2011-10-30
+  status_flag: MyString
+  returned_datetime: 2011-10-30 12:32:13
+  reservation_staff_notes: MyText
+
+two:
+  bookclub_id: 1
+  patron_id: 1
+  start_date: 2011-10-30
+  end_date: 2011-10-30
+  status_flag: MyString
+  returned_datetime: 2011-10-30 12:32:13
+  reservation_staff_notes: MyText

@@ -1,4 +1,10 @@
 Bciab::Application.routes.draw do
+  resources :reservations
+
+  resources :patrons
+
+  resources :book_clubs
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

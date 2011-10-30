@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Library card:</b>
+  <%= @patron.library_card %>
+</p>
+
+<p>
+  <b>First name:</b>
+  <%= @patron.first_name %>
+</p>
+
+<p>
+  <b>Last name:</b>
+  <%= @patron.last_name %>
+</p>
+
+<p>
+  <b>Contact phone:</b>
+  <%= @patron.contact_phone %>
+</p>
+
+<p>
+  <b>Contact email:</b>
+  <%= @patron.contact_email %>
+</p>
+
+<p>
+  <b>Patron staff notes:</b>
+  <%= @patron.patron_staff_notes %>
+</p>
+
+
+<%= link_to 'Edit', edit_patron_path(@patron) %> |
+<%= link_to 'Back', patrons_path %>

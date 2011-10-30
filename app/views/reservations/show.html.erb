@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Bookclub:</b>
+  <%= @reservation.bookclub_id %>
+</p>
+
+<p>
+  <b>Patron:</b>
+  <%= @reservation.patron_id %>
+</p>
+
+<p>
+  <b>Start date:</b>
+  <%= @reservation.start_date %>
+</p>
+
+<p>
+  <b>End date:</b>
+  <%= @reservation.end_date %>
+</p>
+
+<p>
+  <b>Status flag:</b>
+  <%= @reservation.status_flag %>
+</p>
+
+<p>
+  <b>Returned datetime:</b>
+  <%= @reservation.returned_datetime %>
+</p>
+
+<p>
+  <b>Reservation staff notes:</b>
+  <%= @reservation.reservation_staff_notes %>
+</p>
+
+
+<%= link_to 'Edit', edit_reservation_path(@reservation) %> |
+<%= link_to 'Back', reservations_path %>

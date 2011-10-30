@@ -1,0 +1,35 @@
+<h1>Listing reservations</h1>
+
+<table>
+  <tr>
+    <th>Bookclub</th>
+    <th>Patron</th>
+    <th>Start date</th>
+    <th>End date</th>
+    <th>Status flag</th>
+    <th>Returned datetime</th>
+    <th>Reservation staff notes</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @reservations.each do |reservation| %>
+  <tr>
+    <td><%= reservation.bookclub_id %></td>
+    <td><%= reservation.patron_id %></td>
+    <td><%= reservation.start_date %></td>
+    <td><%= reservation.end_date %></td>
+    <td><%= reservation.status_flag %></td>
+    <td><%= reservation.returned_datetime %></td>
+    <td><%= reservation.reservation_staff_notes %></td>
+    <td><%= link_to 'Show', reservation %></td>
+    <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>
+    <td><%= link_to 'Destroy', reservation, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Reservation', new_reservation_path %>

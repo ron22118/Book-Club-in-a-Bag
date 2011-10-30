@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @book_club.title %>
+</p>
+
+<p>
+  <b>Sub title:</b>
+  <%= @book_club.sub_title %>
+</p>
+
+<p>
+  <b>Isbn:</b>
+  <%= @book_club.isbn %>
+</p>
+
+<p>
+  <b>Author:</b>
+  <%= @book_club.author %>
+</p>
+
+<p>
+  <b>Thumbnail url:</b>
+  <%= @book_club.thumbnail_url %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @book_club.description %>
+</p>
+
+<p>
+  <b>Book staff notes:</b>
+  <%= @book_club.book_staff_notes %>
+</p>
+
+
+<%= link_to 'Edit', edit_book_club_path(@book_club) %> |
+<%= link_to 'Back', book_clubs_path %>

@@ -335,4 +335,98 @@ Your bundle is complete! Use `bundle show [gemname]` to see where a bundled gem 
 ===============================================================================
 
 
+ rails generate scaffold BookClub title:string sub_title:string isbn:string author:string thumbnail_url:string description:text book_staff_notes:text
+      invoke  active_record
+      create    db/migrate/20111030172136_create_book_clubs.rb
+      create    app/models/book_club.rb
+      invoke    test_unit
+      create      test/unit/book_club_test.rb
+      create      test/fixtures/book_clubs.yml
+       route  resources :book_clubs
+      invoke  scaffold_controller
+      create    app/controllers/book_clubs_controller.rb
+      invoke    erb
+      create      app/views/book_clubs
+      create      app/views/book_clubs/index.html.erb
+      create      app/views/book_clubs/edit.html.erb
+      create      app/views/book_clubs/show.html.erb
+      create      app/views/book_clubs/new.html.erb
+      create      app/views/book_clubs/_form.html.erb
+      invoke    test_unit
+      create      test/functional/book_clubs_controller_test.rb
+      invoke    helper
+      create      app/helpers/book_clubs_helper.rb
+      invoke      test_unit
+      create        test/unit/helpers/book_clubs_helper_test.rb
+      invoke  assets
+      invoke    coffee
+      create      app/assets/javascripts/book_clubs.js.coffee
+      invoke    scss
+      create      app/assets/stylesheets/book_clubs.css.scss
+      invoke  scss
+      create    app/assets/stylesheets/scaffolds.css.scss
+
+
+rails generate scaffold Patron library_card:string first_name:string last_name:string contact_phone:string contact_email:string  patron_staff_notes:string
+      invoke  active_record
+      create    db/migrate/20111030172435_create_patrons.rb
+      create    app/models/patron.rb
+      invoke    test_unit
+      create      test/unit/patron_test.rb
+      create      test/fixtures/patrons.yml
+       route  resources :patrons
+      invoke  scaffold_controller
+      create    app/controllers/patrons_controller.rb
+      invoke    erb
+      create      app/views/patrons
+      create      app/views/patrons/index.html.erb
+      create      app/views/patrons/edit.html.erb
+      create      app/views/patrons/show.html.erb
+      create      app/views/patrons/new.html.erb
+      create      app/views/patrons/_form.html.erb
+      invoke    test_unit
+      create      test/functional/patrons_controller_test.rb
+      invoke    helper
+      create      app/helpers/patrons_helper.rb
+      invoke      test_unit
+      create        test/unit/helpers/patrons_helper_test.rb
+      invoke  assets
+      invoke    coffee
+      create      app/assets/javascripts/patrons.js.coffee
+      invoke    scss
+      create      app/assets/stylesheets/patrons.css.scss
+      invoke  scss
+   identical    app/assets/stylesheets/scaffolds.css.scss
+
+
+rails generate scaffold Reservation bookclub_id:integer patron_id:integer start_date:date end_date:date status_flag:string returned_datetime:datetime reservation_staff_notes:text
+      invoke  active_record
+      create    db/migrate/20111030173213_create_reservations.rb
+      create    app/models/reservation.rb
+      invoke    test_unit
+      create      test/unit/reservation_test.rb
+      create      test/fixtures/reservations.yml
+       route  resources :reservations
+      invoke  scaffold_controller
+      create    app/controllers/reservations_controller.rb
+      invoke    erb
+      create      app/views/reservations
+      create      app/views/reservations/index.html.erb
+      create      app/views/reservations/edit.html.erb
+      create      app/views/reservations/show.html.erb
+      create      app/views/reservations/new.html.erb
+      create      app/views/reservations/_form.html.erb
+      invoke    test_unit
+      create      test/functional/reservations_controller_test.rb
+      invoke    helper
+      create      app/helpers/reservations_helper.rb
+      invoke      test_unit
+      create        test/unit/helpers/reservations_helper_test.rb
+      invoke  assets
+      invoke    coffee
+      create      app/assets/javascripts/reservations.js.coffee
+      invoke    scss
+      create      app/assets/stylesheets/reservations.css.scss
+      invoke  scss
+   identical    app/assets/stylesheets/scaffolds.css.scss
 
