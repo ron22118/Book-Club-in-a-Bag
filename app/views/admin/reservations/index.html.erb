@@ -1,7 +1,8 @@
 <h1>Listing reservations</h1>
-
+<%= render "admin/top" %>
 <table>
   <tr>
+  	<th>ID</th>
     <th>Bookclub</th>
     <th>Patron</th>
     <th>Start date</th>
@@ -16,6 +17,7 @@
 
 <% @reservations.each do |reservation| %>
   <tr>
+  	<td><%= reservation.id %></td>
     <td><%= reservation.bookclub_id %></td>
     <td><%= reservation.patron_id %></td>
     <td><%= reservation.start_date %></td>
@@ -23,13 +25,13 @@
     <td><%= reservation.status_flag %></td>
     <td><%= reservation.returned_datetime %></td>
     <td><%= reservation.reservation_staff_notes %></td>
-    <td><%= link_to 'Show', reservation %></td>
-    <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>
-    <td><%= link_to 'Destroy', reservation, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Show', admin_reservation_path(reservation) %></td>
+    <td><%= link_to 'Edit', edit_admin_reservation_path(reservation) %></td>
+    <td><%= link_to 'Destroy', admin_reservation_path(reservation), confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Reservation', new_reservation_path %>
+<%= link_to 'New Reservation', new_admin_reservation_path %>

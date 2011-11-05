@@ -619,9 +619,17 @@ ADD admin_  to patrons_url under DELETE redirect
 		<br />
 		
 		<%= link_to 'New Patron', new_admin_patron_path %>
-
+		
+	-Added ID column to table (also added th)
+		<td><%= patron.id %></td>
+		
 --views/admin/patrons/_form.html.erb    <-- yes need both paren & square brackets
 		<%= form_for([:admin, @patron]) do |f| %>
+		
+  -Also changed notes from 
+  		f.text_field
+  	to
+  		f.text_area
 		
 --views/admin/patrons/edit.html.erb  
 		<%= link_to 'Show', admin_patron_path(@patron) %> |
@@ -633,3 +641,17 @@ ADD admin_  to patrons_url under DELETE redirect
 		
 --views/admin/patrons/new.html.erb  
 		<%= link_to 'Back', admin_patrons_path %>
+
+--Done all of above with book_clubs
+--Done all of above with Reservations
+
+--Added top navigation
+	-Created  __top.html.erb in views/admin    <- Don't forget underscore
+	-Put in the following html code:
+			<%= link_to 'Book Clubs', admin_book_clubs_path %> |
+			<%= link_to 'Patrons', admin_patrons_path %> |
+			<%= link_to 'Reservations', admin_reservations_path %>
+	-Put in each index.html.erb
+		<%= render "admin/top" %>
+	
+	

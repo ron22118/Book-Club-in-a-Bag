@@ -1,7 +1,8 @@
 <h1>Listing patrons</h1>
-
+<%= render "admin/top" %>
 <table>
   <tr>
+  	<th>ID Num</th>
     <th>Library card</th>
     <th>First name</th>
     <th>Last name</th>
@@ -15,6 +16,7 @@
 
 <% @patrons.each do |patron| %>
   <tr>
+  	<td><%= patron.id %></td>
     <td><%= patron.library_card %></td>
     <td><%= patron.first_name %></td>
     <td><%= patron.last_name %></td>

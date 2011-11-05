@@ -1,7 +1,8 @@
 <h1>Listing book_clubs</h1>
-
+<%= render "admin/top" %>
 <table>
   <tr>
+  	<th>ID</th>
     <th>Title</th>
     <th>Sub title</th>
     <th>Isbn</th>
@@ -16,6 +17,7 @@
 
 <% @book_clubs.each do |book_club| %>
   <tr>
+  	<td><%= book_club.id %></td>
     <td><%= book_club.title %></td>
     <td><%= book_club.sub_title %></td>
     <td><%= book_club.isbn %></td>
@@ -23,13 +25,13 @@
     <td><%= book_club.thumbnail_url %></td>
     <td><%= book_club.description %></td>
     <td><%= book_club.book_staff_notes %></td>
-    <td><%= link_to 'Show', book_club %></td>
-    <td><%= link_to 'Edit', edit_book_club_path(book_club) %></td>
-    <td><%= link_to 'Destroy', book_club, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Show', admin_book_club_path(book_club) %></td>
+    <td><%= link_to 'Edit', edit_admin_book_club_path(book_club) %></td>
+    <td><%= link_to 'Destroy', admin_book_club_path(book_club), confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Book club', new_book_club_path %>
+<%= link_to 'New Book club', new_admin_book_club_path %>
