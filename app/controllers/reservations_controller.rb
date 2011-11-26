@@ -10,6 +10,38 @@ class ReservationsController < ApplicationController
     end
   end
 
+  # GET /reservations/listing
+  # GET /reservations.json
+  def listing
+    @session_reservation = current_reservation
+    @reservations = Reservation.all
+     @book_clubs = BookClub.all
+    @before = "http://www.syndetics.com/index.aspx?isbn="
+    @after= "/SC.GIF&client=847-985-4000&type=xw12&upc=&oclc=&"
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @reservations }
+    end
+  end
+
+# GET /reservations/blank
+  def blank
+    @session_reservation = current_reservation
+    
+  end
+
+# GET /reservations/1/select_book_club
+  def select_book_club
+       @session_reservation = current_reservation
+       @reservation = Reservation.find(params[:id])
+
+  
+     @reservation.update_attributes(:book_club_id => params[:book_club_id])
+     redirect_to listing_reservations_path
+      
+       
+  end
+
   # GET /reservations/1
   # GET /reservations/1.json
   def show
@@ -80,4 +112,33 @@ class ReservationsController < ApplicationController
       format.json { head :ok }
     end
   end
+  
+    
+   def cal 
+     @session_reservation = current_reservation
+     @reservations = Reservation.all
+     @book_clubs = BookClub.all
+     require 'date'
+     @offset_before = 6
+     @offset_after = 4
+     @today = Date.today
+     @first_of_year = Date.new(@today.year,1,1)
+     @start_of_cal = @first_of_year.months_ago(@offset_before)
+     @end_of_year = Date.new(@today.year,12,1).end_of_month()
+     @end_of_cal = @end_of_year.months_since(@offset_after)
+      
+     @hash_date = Hash.new{|h,k| h[k]={}}
+      (@start_of_cal..@end_of_cal).each do |da_day|
+          
+        
+       @hash_date[da_day.to_s][:patron]  = "A Patron " + da_day.to_s
+       @hash_date[da_day.to_s][:one] = da_day.weeks_ago(6).to_s 
+  
+      end
+     @six_weeks_ago = @today
+     
+  end
+  
+  
 end
+

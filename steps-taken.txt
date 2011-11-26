@@ -654,4 +654,140 @@ ADD admin_  to patrons_url under DELETE redirect
 	-Put in each index.html.erb
 		<%= render "admin/top" %>
 	
-	
+--has_many :through
+
+		class Patron < ActiveRecord::Base
+		  has_many :reservations
+		  has_many :book_clubs, :through => :reservations
+		end
+		
+		class BookClub < ActiveRecord::Base
+		  has_many :reservations
+		  has_many :patrons, :through => :reservations
+		end
+		
+		class Reservation < ActiveRecord::Base
+		  belongs_to :patron
+		  belongs_to :book_club
+		end
+
+
+
+
+===============================================================================
+===============================================================================
+--Main routing section:
+-collection doesn't have an :id between reservation and get name
+-plain get or put does have an :id
+
+
+-- Whats in config/routes.rb
+-------------------------------
+   resources :reservations do
+      collection do
+        get "listing"
+        get "checkin"
+        get "checkout"
+      end
+      get "dates"
+      put "check_it_in"
+      put "check_it_out"
+       resources :patrons
+       resources :book_clubs
+   end
+-------------------------------
+-- what it creates
+     listing_reservations GET    /reservations/listing(.:format)                             {:action=>"listing", :controller=>"reservations"}
+      checkin_reservations GET    /reservations/checkin(.:format)                             {:action=>"checkin", :controller=>"reservations"}
+     checkout_reservations GET    /reservations/checkout(.:format)                            {:action=>"checkout", :controller=>"reservations"}
+         reservation_dates GET    /reservations/:reservation_id/dates(.:format)               {:action=>"dates", :controller=>"reservations"}
+   reservation_check_it_in PUT    /reservations/:reservation_id/check_it_in(.:format)         {:action=>"check_it_in", :controller=>"reservations"}
+  reservation_check_it_out PUT    /reservations/:reservation_id/check_it_out(.:format)        {:action=>"check_it_out", :controller=>"reservations"}
+       reservation_patrons GET    /reservations/:reservation_id/patrons(.:format)             {:action=>"index", :controller=>"patrons"}
+                           POST   /reservations/:reservation_id/patrons(.:format)             {:action=>"create", :controller=>"patrons"}
+    new_reservation_patron GET    /reservations/:reservation_id/patrons/new(.:format)         {:action=>"new", :controller=>"patrons"}
+   edit_reservation_patron GET    /reservations/:reservation_id/patrons/:id/edit(.:format)    {:action=>"edit", :controller=>"patrons"}
+        reservation_patron GET    /reservations/:reservation_id/patrons/:id(.:format)         {:action=>"show", :controller=>"patrons"}
+                           PUT    /reservations/:reservation_id/patrons/:id(.:format)         {:action=>"update", :controller=>"patrons"}
+                           DELETE /reservations/:reservation_id/patrons/:id(.:format)         {:action=>"destroy", :controller=>"patrons"}
+    reservation_book_clubs GET    /reservations/:reservation_id/book_clubs(.:format)          {:action=>"index", :controller=>"book_clubs"}
+                           POST   /reservations/:reservation_id/book_clubs(.:format)          {:action=>"create", :controller=>"book_clubs"}
+ new_reservation_book_club GET    /reservations/:reservation_id/book_clubs/new(.:format)      {:action=>"new", :controller=>"book_clubs"}
+edit_reservation_book_club GET    /reservations/:reservation_id/book_clubs/:id/edit(.:format) {:action=>"edit", :controller=>"book_clubs"}
+     reservation_book_club GET    /reservations/:reservation_id/book_clubs/:id(.:format)      {:action=>"show", :controller=>"book_clubs"}
+                           PUT    /reservations/:reservation_id/book_clubs/:id(.:format)      {:action=>"update", :controller=>"book_clubs"}
+                           DELETE /reservations/:reservation_id/book_clubs/:id(.:format)      {:action=>"destroy", :controller=>"book_clubs"}
+              reservations GET    /reservations(.:format)                                     {:action=>"index", :controller=>"reservations"}
+                           POST   /reservations(.:format)                                     {:action=>"create", :controller=>"reservations"}
+           new_reservation GET    /reservations/new(.:format)                                 {:action=>"new", :controller=>"reservations"}
+          edit_reservation GET    /reservations/:id/edit(.:format)                            {:action=>"edit", :controller=>"reservations"}
+               reservation GET    /reservations/:id(.:format)                                 {:action=>"show", :controller=>"reservations"}
+                           PUT    /reservations/:id(.:format)                                 {:action=>"update", :controller=>"reservations"}
+                           DELETE /reservations/:id(.:format)                                 {:action=>"destroy", :controller=>"reservations"}
+
+
+===============================================================================
+===============================================================================
+-Create Listing action in Reservations controller
+--Copy index action and created "def listing"
+---Added variable with all bookclubs & supplementary variables to show book titles
+    @book_clubs = BookClub.all
+    @before = "http://www.syndetics.com/index.aspx?isbn="
+    @after= "/SC.GIF&client=847-985-4000&type=xw12&upc=&oclc=&"
+    
+===============================================================================
+===============================================================================
+-Created master partial in views/layouts
+-- called  _topmenu.html.erb
+-- use in template:  <%= render "layouts/topmenu" %>
+
+-Created reservation controller partial in views/reservations
+--called _reserve_menu.html.erb
+-- use in template:  <%= render "reserve_menu" %>
+
+==========================================================================
+-Create blank action for default root action <-show top menu only
+-- Action in reservation controller
+  def blank
+    
+  end
+  
+-- Create views/reservations/blank.html.erb
+-- use in template:  <%= render "layouts/topmenu" %>
+
+-Need to add blank to config/routes.rb
+   resources :reservations do
+      collection do
+        get "listing"
+        get "checkin"
+        get "checkout"
+        get "blank"
+      end
+      
+-Create link_to for first option to take to Reservations in _topmenu.html.erb
+<%= link_to "Reserve a Book Club in a Bag", :controller => "reservations", :action => "listing" %>
+
+
+---------------------------------------------------------------------------
+
+rails generate migration 'RenameReservationBookClubId'
+      invoke  active_record
+      create    db/migrate/20111113061043_rename_reservation_book_club_id.rb
+----
+class RenameReservationBookClubId < ActiveRecord::Migration
+  def up
+    rename_column :reservations, :bookclub_id, :book_club_id
+  end
+
+  def down
+    rename_column :reservations, :book_club_id, :bookclub_id
+  end
+end
+
+----
+rake db:migrate
+==  RenameReservationBookClubId: migrating ====================================
+-- rename_column(:reservations, :bookclub_id, :book_club_id)
+   -> 0.0610s
+==  RenameReservationBookClubId: migrated (0.0611s) ===========================
+

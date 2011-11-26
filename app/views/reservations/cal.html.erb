@@ -1,0 +1,26 @@
+<%= render "layouts/topmenu" %>
+<%= render "reserve_menu" %>
+
+
+
+Hello from Cal Today is
+<br />
+
+<%=      @today %>
+<br /> 1st of year:  
+<%=      @first_of_year %>
+<br />Start cal:  
+<%=      @start_of_cal%>
+<br />End of Year:  
+ <%=     @end_of_year %>
+ <br />End cal:  
+ <%=     @end_of_cal %>
+ 
+  <% (@start_of_cal..@end_of_cal).each do |da_day|%> 
+  <br />
+      <%=@hash_date[da_day.to_s][:patron] +" minus 6 weeks "+  @hash_date[da_day.to_s][:one] %>
+  
+   <%   end%>
+
+     
+   

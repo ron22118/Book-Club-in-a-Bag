@@ -1,0 +1,58 @@
+<%= render "layouts/topmenu" %>
+<%= render "reserve_menu" %>
+<table>
+  <tr>
+  	<th>ID</th>
+    <th>Bookclub</th>
+    <th>Patron</th>
+    <th>Start date</th>
+    <th>End date</th>
+    <th>Status flag</th>
+    <th>Returned datetime</th>
+    <th>Reservation staff notes</th>
+  
+  </tr>
+
+<% @reservations.each do |reservation| %>
+  <tr>
+  	<td><%= reservation.id %></td>
+    <td><%= reservation.book_club_id %></td>
+    <td><%= reservation.patron_id %></td>
+    <td><%= reservation.start_date %></td>
+    <td><%= reservation.end_date %></td>
+    <td><%= reservation.status_flag %></td>
+    <td><%= reservation.returned_datetime %></td>
+    <td><%= reservation.reservation_staff_notes %></td>
+
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+        <hr />
+        <div id="subheader" class="span-24 last">
+          <h3 class="alt">Step 2  - Click on a book below to select it and go onto the calendars </h3>
+        </div>
+                <br class="yecclearboth">
+
+<div class="all-bcs">
+	
+<% @book_clubs.each do |book_club| %>
+<div class="one-book-club">
+	<% if book_club.thumbnail_url.nil?
+ 		imgpath = @before+book_club.isbn+@after
+	  else
+        imgpath = book_club.thumbnail_url
+	   end
+	   %>
+  <div class="book-thumb"><%=  link_to image_tag(imgpath, :class => "book-cover"),  :controller => "reservations", :action => "select_book_club", :id =>@session_reservation.id, :book_club_id =>book_club.id  %></div>
+  <div class="book-title"><%= link_to   book_club.title+" ("+book_club.isbn+")  ",  :controller => "reservations", :action => "select_book_club", :id =>@session_reservation.id, :book_club_id =>book_club.id  %></div>
+  <div class="book-author"><%= book_club.author %></div>
+</div>
+<% end %>
+
+</div>
+<br />
+
+

@@ -1,4 +1,5 @@
 class Admin::ReservationsController < ApplicationController
+  
   # GET /reservations
   # GET /reservations.json
   def index
@@ -9,9 +10,23 @@ class Admin::ReservationsController < ApplicationController
       format.json { render json: @reservations }
     end
   end
+  
+  
+  # GET /reservations/listing
+  # GET /reservations.json 
+    def listing
+    @reservations = Reservation.all
+
+    respond_to do |format|
+      format.html # listing.html.erb
+      format.json { render json: @reservations }
+    end
+  end
+  
+  
 
   # GET /reservations/1
-  # GET /reservations/1.json
+  # GET /reservations/1.json 
   def show
     @reservation = Reservation.find(params[:id])
 

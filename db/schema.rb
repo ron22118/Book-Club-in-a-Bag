@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111030173213) do
+ActiveRecord::Schema.define(:version => 20111113061043) do
 
   create_table "book_clubs", :force => true do |t|
     t.string   "title"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(:version => 20111030173213) do
   end
 
   create_table "reservations", :force => true do |t|
-    t.integer  "bookclub_id"
+    t.integer  "book_club_id"
     t.integer  "patron_id"
     t.date     "start_date"
     t.date     "end_date"

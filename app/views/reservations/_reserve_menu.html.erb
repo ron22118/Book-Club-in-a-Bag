@@ -1,0 +1,18 @@
+<div class="datitle"><h>Reserve a Book Club in a Bag...</h3></div>
+   <br class="yecclearboth">
+   
+   <div clas="topmenu">
+	   	<div class="onechoice">1) Select Book Club</div>
+	   	<div class="onechoice">2) Choose Dates</div>
+	   	<div class="onechoice">3) Assign Patron</div>
+	   	<div class="onechoice">4) Finalize</div>
+   	</div>
+   	<br class="yecclearboth">
+   	
+   <div clas="topmenu">
+	   	<div class="onechoice"><%= @session_reservation.book_club.title unless @session_reservation.book_club_id.nil? %> </div>
+	   	<div class="onechoice"> </div>
+	   	<div class="onechoice"> <%= @session_reservation.patron.first_name unless @session_reservation.patron_id.nil? %></div>
+	   	<div class="onechoice"> </div>
+   	</div>
+   	<br class="yecclearboth">
